@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Completa: Subir un Proyecto a GitHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../styles/styles.css" />
+    <link rel="icon" href="../../assets/code.svg">
+</head>
+<body>
+
+        <nav>
+            <a class="nav-logo" href="../../index.html">Diego<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="../blog.html">Regresar</a></li>
+            </ul>
+        </nav>
+
+        <div class="page-wrapper">
+
+        <!-- HEADER -->
+        <header class="article-header">
+            <div class="article-meta">
+                <span class="meta-tag">Tutorial</span>
+                <span class="meta-tag git">Git &amp; GitHub</span>
+                <span class="meta-date">2025 · Lectura ~8 min</span>
+            </div>
+
+            <h1 class="article-title">Guía Completa: Subir un Proyecto a GitHub</h1>
+
+            <p class="article-subtitle">
+                Aprende a subir tu proyecto a un repositorio digital paso a paso — desde la <strong>instalación de Git</strong> y los comandos necesarios hasta llegar a tu repositorio en la nube.
+            </p>
+        </header>
+
+        <!-- PREREQS -->
+        <div class="prereq-box">
+            <strong>Requisitos previos:</strong> Tener <a href="https://git-scm.com/downloads" target="_blank" class="st-orange">Git</a> instalado y una cuenta en <a href="https://github.com" target="_blank">github.com</a>
+        </div>
+
+        <!-- INTRO -->
+        <p style="color:var(--muted); font-size:0.97rem; margin-bottom:1.5rem;">
+            <strong style="color:var(--text); font-weight:500;">Git</strong> es un sistema de control de versiones distribuido, gratuito y de código abierto. Permite <strong style="color:var(--text); font-weight:500;">gestionar el historial de cambios</strong> en tu código, volver a versiones anteriores y trabajar en equipo sin sobrescribir el trabajo de otros.
+        </p>
+
+        <!-- FLOW -->
+        <div class="flow-box">
+            <span class="flow-item">Tu carpeta local</span>
+            <span class="flow-arrow"> → </span><span class="flow-item">git init</span>
+            <span class="flow-arrow"> → </span><span class="flow-item">git add</span>
+            <span class="flow-arrow"> → </span><span class="flow-item">git commit</span>
+            <span class="flow-arrow"> → </span><span class="flow-item">Crear repo en GitHub</span>
+            <span class="flow-arrow"> → </span><span class="flow-item">git push</span>
+            <span class="flow-arrow"> → </span><span class="flow-done">✓ En la nube</span>
+        </div>
+
+        <div class="section-break"><span>Pasos</span></div>
+
+        <!-- STEP 1 -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <h2 class="step-title">Instalar Git y verificar la instalación</h2>
+            </div>
+            <p>Descarga Git desde <a href="https://git-scm.com/downloads" target="_blank" style="color:var(--accent);">git-scm.com/downloads</a> según tu sistema operativo e instálalo con las opciones por defecto. Una vez instalado, abre tu terminal y verifica:</p>
+
+            <div class="code-block">
+                <div class="code-topbar">
+                    <div class="code-dots">
+                        <div class="code-dot" style="background:#ff5f57"></div>
+                        <div class="code-dot" style="background:#febc2e"></div>
+                        <div class="code-dot" style="background:#28c840"></div>
+                    </div>
+                    <span class="code-label">terminal</span>
+                </div>
+                <div class="code-inner"><span class="c-cmd">git</span> --version</div>
+            </div>
+
+            <div class="output-block">
+                <div class="output-label">Resultado esperado</div>
+                <pre><span class="ok">git version 2.53.0</span></pre>
+            </div>
+
+            <div class="tip">
+                <strong>Tip:</strong> El número de versión puede variar. Lo importante es que no arroje un error.
+            </div>
+        </div>
+
+        <div class="step-divider"></div>
+
+        <!-- STEP 2 -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <h2 class="step-title">Configurar tus credenciales</h2>
+            </div>
+            <p>Git necesita saber quién eres antes de registrar cualquier cambio. Esto se hace <strong>una sola vez</strong> en tu computadora.</p>
+
+            <div class="code-block">
+                <div class="code-topbar">
+                    <div class="code-dots">
+                        <div class="code-dot" style="background:#ff5f57"></div>
+                        <div class="code-dot" style="background:#febc2e"></div>
+                        <div class="code-dot" style="background:#28c840"></div>
+                    </div>
+                    <span class="code-label">terminal</span>
+                </div>
+                <div class="code-inner">
+<span class="c-cmd">git</span> config <span class="c-flag">--global</span> user.name <span class="c-string">"Tu Nombre"</span>
+<span class="c-cmd">git</span> config <span class="c-flag">--global</span> user.email <span class="c-string">"tu@email.com"</span>
+<span class="c-comment"># Para confirmar que se guardaron correctamente:</span>
+<span class="c-cmd">git</span> config <span class="c-flag">--list</span></div>
+            </div>
+
+            <div class="output-block">
+                <div class="output-label">Resultado esperado (al final)</div>
+                <pre><span class="info">user.name=Tu Nombre
+user.email=tu@email.com</span></pre>
+            </div>
+
+            <div class="warning">
+                <strong>Importante:</strong> El email debe ser el mismo con el que creaste tu cuenta de GitHub. Si no coinciden, tus commits no aparecerán vinculados a tu perfil.
+            </div>
+        </div>
+
+        <div class="step-divider"></div>
+
+        <!-- STEP 3 -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <h2 class="step-title">Abrir la terminal en tu carpeta de proyecto</h2>
+            </div>
+            <p>Navega hasta la carpeta donde está tu proyecto. Tienes dos opciones:</p>
+
+            <div class="options-grid">
+                <div class="option-card">
+                    <p class="option-label">Opción A — Terminal</p>
+                    <p>Navega usando el comando <code>cd</code> hasta llegar a tu carpeta.</p>
+                </div>
+                <div class="option-card">
+                    <p class="option-label">Opción B — Explorador</p>
+                    <p>Abre la carpeta, haz clic derecho y selecciona <strong style="color:var(--text)">Abrir en Terminal</strong>.</p>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-topbar">
+                    <div class="code-dots">
+                        <div class="code-dot" style="background:#ff5f57"></div>
+                        <div class="code-dot" style="background:#febc2e"></div>
+                        <div class="code-dot" style="background:#28c840"></div>
+                    </div>
+                    <span class="code-label">terminal</span>
+                </div>
+                <div class="code-inner">
+<span class="c-cmd">cd</span> <span class="c-path">Desktop/mi-proyecto</span>
+<span class="c-comment"># Confirmar en qué carpeta estás:</span>
+<span class="c-cmd">pwd</span></div>
+            </div>
+
+            <div class="output-block">
+                <div class="output-label">Resultado esperado</div>
+                <pre>/Users/tunombre/Desktop/mi-proyecto</pre>
+            </div>
+        </div>
+
+        <div class="step-divider"></div>
+
+        <!-- STEP 4 -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">4</div>
+                <h2 class="step-title">Inicializar el repositorio — <span class="cmd">git init</span></h2>
+            </div>
+            <p>Este comando convierte tu carpeta normal en un <strong>repositorio de Git</strong>:</p>
+
+            <div class="code-block">
+                <div class="code-topbar">
+                    <div class="code-dots">
+                        <div class="code-dot" style="background:#ff5f57"></div>
+                        <div class="code-dot" style="background:#febc2e"></div>
+                        <div class="code-dot" style="background:#28c840"></div>
+                    </div>
+                    <span class="code-label">terminal</span>
+                </div>
+                <div class="code-inner"><span class="c-cmd">git</span> init</div>
+            </div>
+
+            <div class="output-block">
+                <div class="output-label">Resultado esperado</div>
+                <pre><span class="ok">Initialized empty Git repository in /Users/tunombre/Desktop/mi-proyecto/.git/</span></pre>
+            </div>
+
+            <div class="tip">
+                <strong>Tip:</strong> Esto crea una carpeta oculta llamada <code>.git/</code> dentro de tu proyecto. Ahí Git guarda todo el historial. <strong>Nunca la borres.</strong>
+            </div>
+        </div>
+
+        <div class="step-divider"></div>
+
+        <!-- STEP 5 -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">5</div>
+                <h2 class="step-title">Revisar el estado — <span class="cmd">git status</span></h2>
+            </div>
+            <p>Antes de agregar archivos, siempre es bueno ver en qué estado está todo:</p>
+
+            <div class="code-block">
+                <div class="code-topbar">
+                    <div class="code-dots">
+                        <div class="code-dot" style="background:#ff5f57"></div>
+                        <div class="code-dot" style="background:#febc2e"></div>
+                        <div class="code-dot" style="background:#28c840"></div>
+                    </div>
+                    <span class="code-label">terminal</span>
+                </div>
+                <div class="code-inner"><span class="c-cmd">git</span> status</div>
+            </div>
+
+            <div class="output-block">
+                <div class="output-label">Resultado esperado (primera vez)</div>
+                <pre>On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+        <span style="color:#f85149;">index.html
+        style.css
+        script.js</span>
+
+nothing added to commit but untracked files present</pre>
+            </div>
+
+            <div class="tip">
+                <strong>Tip:</strong> Los archivos en rojo son "untracked" — Git los ve pero aún no los rastrea. En el siguiente paso los agregaremos.
+            </div>
+        </div>
+
+        <div class="step-divider"></div>
+
+        <!-- STEP 6 -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">6</div>
+                <h2 class="step-title">Agregar archivos al staging — <span class="cmd">git add</span></h2>
+            </div>
+            <p>El <strong>staging area</strong> es una zona de preparación antes de guardar los cambios.</p>
+
+            <div class="code-block">
+                <div class="code-topbar">
+                    <div class="code-dots">
+                        <div class="code-dot" style="background:#ff5f57"></div>
+                        <div class="code-dot" style="background:#febc2e"></div>
+                        <div class="code-dot" style="background:#28c840"></div>
+                    </div>
+                    <span class="code-label">terminal</span>
+                </div>
+                <div class="code-inner">
+<span class="c-comment"># Agregar todos los archivos de una vez:</span>
+<span class="c-cmd">git</span> add .
+
+<span class="c-comment"># O agregar un archivo específico:</span>
+<span class="c-cmd">git</span> add <span class="c-path">index.html</span></div>
+            </div>
+
+            <div class="output-block">
+                <div class="output-label">git status después del add</div>
+                <pre>Changes to be committed:
+        <span style="color:#56d364;">new file:   index.html
+        new file:   style.css
+        new file:   script.js</span></pre>
+            </div>
+
+            <div class="tip">
+                <strong>Tip:</strong> Ahora los archivos aparecen en verde — están listos para el commit.
+            </div>
+        </div>
+
+        <div class="step-divider"></div>
+
+        <!-- STEP 7 -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">7</div>
+                <h2 class="step-title">Primer commit — <span class="cmd">git commit</span></h2>
+            </div>
+            <p>Un <strong>commit</strong> es una fotografía del estado de tu proyecto en este momento. Siempre lleva un mensaje descriptivo:</p>
+
+            <div class="code-block">
+                <div class="code-topbar">
+                    <div class="code-dots">
+                        <div class="code-dot" style="background:#ff5f57"></div>
+                        <div class="code-dot" style="background:#febc2e"></div>
+                        <div class="code-dot" style="background:#28c840"></div>
+                    </div>
+                    <span class="code-label">terminal</span>
+                </div>
+                <div class="code-inner"><span class="c-cmd">git</span> commit <span class="c-flag">-m</span> <span class="c-string">"primer commit: estructura inicial del proyecto"</span></div>
+            </div>
+
+            <div class="output-block">
+                <div class="output-label">Resultado esperado</div>
+                <pre><span class="ok">[main (root-commit) a3f2c1d] primer commit: estructura inicial del proyecto</span>
+ 3 files changed, 45 insertions(+)
+ create mode 100644 index.html
+ create mode 100644 style.css
+ create mode 100644 script.js</pre>
+            </div>
+
+            <div class="tip">
+                <strong>Buenos mensajes de commit:</strong> Deben describir QUÉ cambiaste.<br>
+                ✅ <code>"agrega formulario de contacto"</code> &nbsp;&nbsp; ✅ <code>"corrige bug en el menú móvil"</code><br>
+                ❌ <code>"cambios"</code> &nbsp;&nbsp; ❌ <code>"arreglé cosas"</code>
+            </div>
+        </div>
+
+        <div class="step-divider"></div>
+
+        <!-- STEP 8 -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">8</div>
+                <h2 class="step-title">Crear el repositorio en GitHub</h2>
+            </div>
+            <p>Ahora necesitas un lugar en la nube donde vivir tu proyecto:</p>
+
+            <div class="flow-steps">
+                <div class="flow-step-item">
+                    <div class="flow-step-num">1</div>
+                    <div><span class="flow-step-cmd">github.com → New repository</span><span class="flow-step-desc">Inicia sesión y haz clic en "New repository".</span></div>
+                </div>
+                <div class="flow-step-item">
+                    <div class="flow-step-num">2</div>
+                    <div><span class="flow-step-cmd">Repository name</span><span class="flow-step-desc">Pon el nombre de tu proyecto (sin espacios, usa guiones).</span></div>
+                </div>
+                <div class="flow-step-item">
+                    <div class="flow-step-num">3</div>
+                    <div><span class="flow-step-cmd">Public / Private</span><span class="flow-step-desc">Elige la visibilidad según prefieras.</span></div>
+                </div>
+                <div class="flow-step-item">
+                    <div class="flow-step-num">4</div>
+                    <div><span class="flow-step-cmd">Create repository</span><span class="flow-step-desc">Sin marcar ninguna opción extra — el repo debe quedar completamente vacío.</span></div>
+                </div>
+            </div>
+
+            <div class="warning">
+                <strong>Importante:</strong> NO marques "Add a README file" ni ninguna otra opción. El repo debe quedar completamente vacío.
+            </div>
+        </div>
+
+        <div class="step-divider"></div>
+
+        <!-- STEP 9 -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">9</div>
+                <h2 class="step-title">Conectar tu proyecto con GitHub</h2>
+            </div>
+            <p>Después de crear el repo vacío, GitHub te mostrará instrucciones. Usa la sección <strong>"…or push an existing repository from the command line"</strong> y ejecuta estos comandos:</p>
+
+            <div class="code-block">
+                <div class="code-topbar">
+                    <div class="code-dots">
+                        <div class="code-dot" style="background:#ff5f57"></div>
+                        <div class="code-dot" style="background:#febc2e"></div>
+                        <div class="code-dot" style="background:#28c840"></div>
+                    </div>
+                    <span class="code-label">terminal</span>
+                </div>
+                <div class="code-inner">
+<span class="c-comment"># Agregar el origen remoto:</span>
+<span class="c-cmd">git</span> remote add origin <span class="c-path">https://github.com/tu-usuario/mi-proyecto.git</span>
+
+<span class="c-comment"># Renombrar la rama principal a main:</span>
+<span class="c-cmd">git</span> branch <span class="c-flag">-M</span> main</div>
+            </div>
+
+            <div class="tip">
+                <strong>Tip:</strong> <code>branch -M main</code> asegura que tu rama se llame <code>main</code>, el estándar actual de GitHub.
+            </div>
+        </div>
+
+        <div class="step-divider"></div>
+
+        <!-- STEP 10 -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">10</div>
+                <h2 class="step-title">Autenticarte con token de acceso</h2>
+            </div>
+
+            <div class="warning">
+                <strong>Nota:</strong> Salta al paso 11. Si durante el push te pide autenticación, regresa aquí.
+            </div>
+
+            <p>GitHub ya no acepta contraseñas directas desde la terminal. Necesitas un <strong>Personal Access Token (PAT)</strong>:</p>
+
+            <div class="flow-steps">
+                <div class="flow-step-item">
+                    <div class="flow-step-num">1</div>
+                    <div><span class="flow-step-cmd">Foto de perfil → Settings</span><span class="flow-step-desc">Ve a tu configuración de cuenta en GitHub.</span></div>
+                </div>
+                <div class="flow-step-item">
+                    <div class="flow-step-num">2</div>
+                    <div><span class="flow-step-cmd">Developer settings → Personal access tokens</span><span class="flow-step-desc">En el menú izquierdo, baja hasta Developer settings.</span></div>
+                </div>
+                <div class="flow-step-item">
+                    <div class="flow-step-num">3</div>
+                    <div><span class="flow-step-cmd">Generate new token (classic)</span><span class="flow-step-desc">Marca el scope ✅ <code>repo</code> — da acceso completo a repositorios.</span></div>
+                </div>
+                <div class="flow-step-item">
+                    <div class="flow-step-num">4</div>
+                    <div><span class="flow-step-cmd">Copiar el token inmediatamente</span><span class="flow-step-desc">GitHub solo te lo muestra una vez. Guárdalo en un lugar seguro.</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-divider"></div>
+
+        <!-- STEP 11 -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">11</div>
+                <h2 class="step-title">Hacer el push — <span class="cmd">git push</span></h2>
+            </div>
+            <p>Sube tu proyecto a GitHub por primera vez:</p>
+
+            <div class="code-block">
+                <div class="code-topbar">
+                    <div class="code-dots">
+                        <div class="code-dot" style="background:#ff5f57"></div>
+                        <div class="code-dot" style="background:#febc2e"></div>
+                        <div class="code-dot" style="background:#28c840"></div>
+                    </div>
+                    <span class="code-label">terminal</span>
+                </div>
+                <div class="code-inner"><span class="c-cmd">git</span> push <span class="c-flag">-u</span> origin main</div>
+            </div>
+
+            <p>Si te pide credenciales, ingresa tu usuario de GitHub y pega el token como contraseña:</p>
+
+            <div class="output-block">
+                <div class="output-label">Resultado esperado</div>
+                <pre><span class="ok">Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 1.23 KiB | 1.23 MiB/s, done.
+To https://github.com/tu-usuario/mi-proyecto.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'remote/origin/main'.</span></pre>
+            </div>
+
+            <div class="tip">
+                <strong>Tip:</strong> El flag <code>-u</code> guarda la conexión entre tu rama local y la remota. Los próximos pushes solo necesitan <code>git push</code>.
+            </div>
+        </div>
+
+        <div class="step-divider"></div>
+
+        <!-- STEP 12 -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">12</div>
+                <h2 class="step-title">Verificar en GitHub</h2>
+            </div>
+            <p>Ve a <code>https://github.com/tu-usuario/mi-proyecto</code> en tu navegador. Deberías ver todos tus archivos ahí.</p>
+        </div>
+
+        <!-- SUCCESS -->
+        <div class="success-banner">
+            <span class="success-icon">🎉</span>
+            <h3>¡Felicidades!</h3>
+            <p>Tu proyecto ya vive en GitHub. Desde ahora tienes control de versiones, respaldo en la nube y puedes colaborar con otras personas.</p>
+        </div>
+
+        <div class="section-break"><span>Flujo continuo</span></div>
+
+        <!-- FUTURE FLOW -->
+        <p style="color:var(--muted); font-size:0.97rem; margin-bottom:1rem;">Una vez que el repo está conectado, cada vez que hagas cambios el flujo es:</p>
+
+        <div class="code-block">
+            <div class="code-topbar">
+                <div class="code-dots">
+                    <div class="code-dot" style="background:#ff5f57"></div>
+                    <div class="code-dot" style="background:#febc2e"></div>
+                    <div class="code-dot" style="background:#28c840"></div>
+                </div>
+                <span class="code-label">flujo de trabajo diario</span>
+            </div>
+            <div class="code-inner">
+<span class="c-comment"># 1. Ver qué cambió</span>
+<span class="c-cmd">git</span> status
+
+<span class="c-comment"># 2. Agregar los cambios</span>
+<span class="c-cmd">git</span> add .
+
+<span class="c-comment"># 3. Guardar con descripción</span>
+<span class="c-cmd">git</span> commit <span class="c-flag">-m</span> <span class="c-string">"descripción de los cambios"</span>
+
+<span class="c-comment"># 4. Subir a GitHub</span>
+<span class="c-cmd">git</span> push</div>
+        </div>
+
+        <div class="section-break"><span>Referencia rápida</span></div>
+
+        <!-- TABLE -->
+        <table class="cmd-table">
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>Qué hace</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>git init</td><td>Inicializa un repositorio local</td></tr>
+                <tr><td>git status</td><td>Muestra el estado actual de los archivos</td></tr>
+                <tr><td>git add .</td><td>Agrega todos los archivos al staging</td></tr>
+                <tr><td>git add archivo.html</td><td>Agrega un archivo específico</td></tr>
+                <tr><td>git commit -m "msg"</td><td>Crea un commit con mensaje</td></tr>
+                <tr><td>git remote add origin URL</td><td>Conecta con el repo de GitHub</td></tr>
+                <tr><td>git branch -M main</td><td>Renombra la rama a main</td></tr>
+                <tr><td>git push -u origin main</td><td>Primer push (establece la conexión)</td></tr>
+                <tr><td>git push</td><td>Pushes siguientes</td></tr>
+                <tr><td>git log --oneline</td><td>Ver historial de commits</td></tr>
+            </tbody>
+        </table>
+
+    </div><!-- /page-wrapper -->
+
+    <footer>
+        <p>Diseñado y desarrollado por Diego Escobar González · 2026</p>
+    </footer>
+
+</body>
+</html>
